@@ -1,0 +1,25 @@
+-f:ClassName:SuperType
+
+//comments are ignored
+//parentheses are options
+//angle brackets are optional
+
+//attributes
++s:f:fullvar: Type = 'default_value'
+var: Type
+
+
+//constructor
++default
+#fullvar::newvar: Type
+fullvar::newvar: Type, var: Type, Type
+
+
+//methods
++s:method, param: Type, Type, >Type
+get:all
+set:all
+set:var
+get:var
+
+

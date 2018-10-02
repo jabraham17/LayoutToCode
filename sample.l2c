@@ -1,0 +1,20 @@
+(-|#|+| )<f:>ClassName <: SuperClass>
+
+//comments are ignored
+//parentheses are options
+//angle brackets are optional
+
+//attributes
+(-|#|+| )<s:><f:>var: Type <= default_value>
+
+//constructors
+(-|#|+| )default
+(-|#|+| )<set to var::><param name:> Type, 
+
+//methods
+(-|#|+| )<s:><f:>method, <param name:> Type, >Type
+get:all
+set:all
+set:var
+get:var
+
