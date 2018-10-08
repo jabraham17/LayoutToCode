@@ -6,18 +6,18 @@ import glob
 import layout2java as u2j
 
 #compile based on the language provided
-def compile(file, lang):
-    if(lang == 'java'):
+def compile(filename, lang):
+    if lang == 'java':
         #defined in uml2java
-        u2j.compile(file)
+        u2j.compile(filename)
 
-#check if the file given has the proper extensions and return an open file for read
+#check if the file given has the proper extensions
 #this is used by the arg parser
-def open_file(name):
+def check_file(name):
     #if no proper file extension, raise error
     if not name.endswith('.l2c'):
         raise argparse.ArgumentTypeError(f'{name} is not a proper file that can be used by this script')
-    return open(name, 'r')
+    return name
 
 #gets all files from the current directory
 def all_files():
@@ -26,7 +26,7 @@ def all_files():
 #returns the parsed args
 def arg_parser():
     parser = argparse.ArgumentParser(description='Convert class definition in a l2c file to a fully fledged class in a programming language')
-    parser.add_argument('files', nargs='*', type=open_file, help='The list of files to compile to the language')
+    parser.add_argument('files', nargs='*', type=check_file, help='The list of files to compile to the language')
     parser.add_argument('--lang', nargs='?', default='java', choices=['java'], type=str, help='The language to compile to, the default is java')
     return parser
 
@@ -43,10 +43,10 @@ def main():
     #if no files were supplied by user, get all in current dir
     if len(files) == 0:
         #map the filenames to the open_file func
-        files = list(map(open_file, all_files()))
+        files = list(map(check_file, all_files()))
 
     #compile each file
-    for file in files:
-        compile(file, args.lang)
+    for filename in files:
+        compile(filename, args.lang)
 
 main()

@@ -3,7 +3,9 @@ grammar ClassLayout;
 
 //Parser Rules
 
-u2cFile : classHeading (attribute | constructor | method | getset)* EOF;
+u2cFile : classHeading body EOF ;
+
+body : (attribute | constructor | method | getset)* ;
 
 //class heading
 classHeading : modifiers Name superClass? Newline ;
