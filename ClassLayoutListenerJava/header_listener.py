@@ -1,4 +1,3 @@
-import antlr4 as a4
 from ClassLayout.ClassLayoutParser import ClassLayoutParser
 from ClassLayout.ClassLayoutListener import ClassLayoutListener
 from ClassLayoutListenerJava.modifier_listener import  ModifierListener
@@ -15,7 +14,6 @@ class HeaderListener(ClassLayoutListener):
         #handle the modifiers
         modifier_listener = ModifierListener()
         ctx.modifiers().enterRule(modifier_listener)
-
         heading.append(modifier_listener.content)
 
         #get the class name

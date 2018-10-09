@@ -1,7 +1,7 @@
-import antlr4 as a4
 from ClassLayout.ClassLayoutParser import ClassLayoutParser
 from ClassLayout.ClassLayoutListener import ClassLayoutListener
 from ClassLayoutListenerJava.header_listener import HeaderListener
+from ClassLayoutListenerJava.body_listener import BodyListener
 
 #listener to handle the whole file
 class FileListener(ClassLayoutListener):
@@ -10,9 +10,12 @@ class FileListener(ClassLayoutListener):
 
     def enterU2cFile(self, ctx : ClassLayoutParser.U2cFileContext):
 
-        listener = HeaderListener()
-        ctx.classHeading().enterRule(listener)
-        self.content = listener.content
+        h_listener = HeaderListener()
+        ctx.classHeading().enterRule(h_listener)
 
-        map(ctx.attribute())
+        b_listener = BodyListener()
+        ctx.body().enterRule(b_listener)
+
+        self.content = h_listener.content + b_listener.content
+
 
