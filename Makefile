@@ -1,4 +1,4 @@
-ANTLR=java -Xmx500M -cp ${ANTLR_PATH}:${CLASSPATH} org.antlr.v4.Tool
+ANTLR=java -Xmx500M -cp antlr/antlr-4.7.1-complete.jar org.antlr.v4.Tool
 
 GRAMMAR=ClassLayout.g4
 
@@ -11,4 +11,4 @@ mkdirs:
 	mkdir -p $(OUTPUT)
 
 clean:
-	rm -r $(OUTPUT)
+	rm -rf $(OUTPUT)
