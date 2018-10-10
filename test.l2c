@@ -6,6 +6,7 @@
 
 //attributes
 +s:f:fullvar: Type = 'default_value'
+fullvar: Type = 9
 var: Type
 
 

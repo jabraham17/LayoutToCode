@@ -1,31 +1,29 @@
-import antlr4 as a4
 from ClassLayout.ClassLayoutParser import ClassLayoutParser
 from ClassLayout.ClassLayoutListener import ClassLayoutListener
+from class_composer.composer import Composer
+from class_composer.modifier import Modifier
 
-#listener to handle all modifiers, access, static, and final
+# listener to handle all modifiers, access, static, and final
 class ModifierListener(ClassLayoutListener):
     def __init__(self):
-        self.content = ''
+        self.mod = Modifier()
 
-    def enterModifiers(self, ctx:ClassLayoutParser.ModifiersContext):
-        modifiers = []
+    def enterModifiers(self, ctx: ClassLayoutParser.ModifiersContext):
 
-        #handle the access modifiers
+        # handle the access modifiers
         if ctx.AccessModifier():
             access = ctx.AccessModifier().getText()
             if access == '-':
-                modifiers.append('private')
+                self.mod.acc = 'pri'
             elif access == '+':
-                modifiers.append('public')
+                self.mod.acc = 'pub'
             elif access == '#':
-                modifiers.append('protected')
+                self.mod.acc = 'pro'
 
         # handle the static modifier
         if ctx.staticModifier():
-            modifiers.append('static')
+            self.mod.stat = True
 
         # handle the final modifier
         if ctx.finalModifier():
-            modifiers.append('final')
-
-        self.content += ' '.join(modifiers)
+            self.mod.fin = True

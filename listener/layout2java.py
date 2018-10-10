@@ -1,7 +1,7 @@
 import antlr4 as a4
 from ClassLayout.ClassLayoutLexer import ClassLayoutLexer
 from ClassLayout.ClassLayoutParser import ClassLayoutParser
-from ClassLayoutListenerJava.file_listener import FileListener
+from .file import FileListener
 
 # compile for java
 def compile(filename):
@@ -21,4 +21,4 @@ def compile(filename):
     walker = a4.ParseTreeWalker()
     walker.walk(fl, tree)
 
-    print(fl.content)
+    print(fl.c.write('java'))

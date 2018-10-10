@@ -1,21 +1,20 @@
 from ClassLayout.ClassLayoutParser import ClassLayoutParser
 from ClassLayout.ClassLayoutListener import ClassLayoutListener
-from ClassLayoutListenerJava.header_listener import HeaderListener
-from ClassLayoutListenerJava.body_listener import BodyListener
+from .header import HeaderListener
+from .body import BodyListener
+from class_composer.class_composer import Class
 
-#listener to handle the whole file
+# listener to handle the whole file
 class FileListener(ClassLayoutListener):
     def __init__(self):
-        self.content = ''
+        self.c = Class()
 
     def enterU2cFile(self, ctx : ClassLayoutParser.U2cFileContext):
 
-        h_listener = HeaderListener()
+        h_listener = HeaderListener(self.c)
         ctx.classHeading().enterRule(h_listener)
 
-        b_listener = BodyListener()
+        b_listener = BodyListener(self.c)
         ctx.body().enterRule(b_listener)
-
-        self.content = h_listener.content + b_listener.content
 
 

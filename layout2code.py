@@ -1,13 +1,13 @@
 import argparse
 import os
 import glob
-import layout2java as u2j
+from listener.layout2java import compile as compile_as_java
 
 # compile based on the language provided
 def compile(filename, lang):
     if lang == 'java':
         # defined in uml2java
-        u2j.compile(filename)
+        compile_as_java(filename)
 
 # check if the file given has the proper extensions
 # this is used by the arg parser

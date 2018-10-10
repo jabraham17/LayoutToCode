@@ -4,11 +4,30 @@ GRAMMAR=ClassLayout.g4
 
 OUTPUT=ClassLayout
 
-buildGrammar: clean mkdirs
-	$(ANTLR) -o $(OUTPUT) -Dlanguage=Python3 $(GRAMMAR)
+GREEN=\033[0;32m
+RED=\033[0;31m
+COLOR_OFF=\033[0m
 
-mkdirs:
-	mkdir -p $(OUTPUT)
+.PHONY: runTest buildGrammar clean
+
+# the envirmoent needs to be running to run
+runTest: buildGrammar
+	@if [ -z "${VIRTUAL_ENV}" ] ; \
+	then \
+		echo -e "$(RED)Need to start the env$(COLOR_OFF)"; \
+	else \
+		echo -e "$(GREEN)Running test.l2c through script inside of env$(COLOR_OFF)"; \
+		python layout2code.py test.l2c; \
+		echo -e "$(GREEN)Done$(COLOR_OFF)"; \
+	fi; \
+
+buildGrammar: clean
+	@echo -e "$(GREEN)Building grammar and creating listeners$(COLOR_OFF)"
+	@mkdir -p $(OUTPUT)
+	@$(ANTLR) -o $(OUTPUT) -Dlanguage=Python3 $(GRAMMAR)
+	@echo -e "$(GREEN)Done$(COLOR_OFF)"
 
 clean:
-	rm -rf $(OUTPUT)
+	@echo -e "$(GREEN)Cleaning......$(COLOR_OFF)"
+	@rm -rf $(OUTPUT)
+	@echo -e "$(GREEN)Done$(COLOR_OFF)"
