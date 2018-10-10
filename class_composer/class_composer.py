@@ -1,5 +1,7 @@
 from .composer import Composer
 from .modifier import Modifier
+from .getset import GetSet
+from .attribute import Attribute
 
 # frame work for a class
 class Class(Composer):
@@ -29,6 +31,12 @@ class Class(Composer):
         return list(filter(lambda x: isinstance(x, kind), self.comp))
 
     def write(self, lang):
+
+        # before we can attempt to write, we loop through all the getters and setters and apply the proper attribute
+        attrs = self.get_all_of_kind(Attribute)
+        for getset in self.get_all_of_kind(GetSet):
+            getset.set_attr(attrs)
+
         s = []
         if lang == 'java':
 

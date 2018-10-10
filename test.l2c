@@ -6,7 +6,7 @@
 
 //attributes
 +s:f:fullvar: Type = 'default_value'
-fullvar: Type = 9
+#numvar: Type = 9
 var: Type
 
 
@@ -19,8 +19,6 @@ fullvar::newvar: Type, var: Type, Type
 //methods
 +s:method, param: Type, Type, >Type
 get:all
-set:all
 set:var
-get:var
 
 

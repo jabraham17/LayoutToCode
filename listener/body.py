@@ -32,6 +32,6 @@ class BodyListener(ClassLayoutListener):
             elif isinstance(a, ClassLayoutParser.GetsetContext):
                 listener = GetSetListener()
                 a.enterRule(listener)
-                # self.cla.comp.append(listener.attr)
+                self.cla.comp.append(listener.getset)
             else:
                 raise TypeError('Type of element in the body was not handled')

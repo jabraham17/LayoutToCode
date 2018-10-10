@@ -5,6 +5,7 @@ from .modifier import Modifier
 class Attribute(Composer):
     def __init__(self, **values):
 
+        # check that mod is a modifier
         mod = values.get('mod', Modifier())
         assert isinstance(mod, Modifier), "'mod' must be of type 'Modifier'"
         self.mod = mod
