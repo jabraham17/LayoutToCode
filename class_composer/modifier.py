@@ -15,7 +15,7 @@ class Modifier:
 
         # make sure fin is a bool
         fin = values.get('fin', False)
-        assert isinstance(stat, bool), "'fin' must be of type 'bool'"
+        assert isinstance(fin, bool), "'fin' must be of type 'bool'"
         self.fin = fin
 
     # return the modfiers as as string
