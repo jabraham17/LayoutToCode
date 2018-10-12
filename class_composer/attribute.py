@@ -22,7 +22,7 @@ class Attribute(Composer):
         self.kind = kind
 
         # default value can be whatever the user passes
-        dval = values.get('dval', '')
+        dval = values.get('dval', None)
         self.dval = dval
 
     # return the code for this class in the specified language

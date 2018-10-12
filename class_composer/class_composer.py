@@ -2,6 +2,7 @@ from .composer import Composer
 from .modifier import Modifier
 from .getset import GetSet
 from .attribute import Attribute
+from .constructor import Constructor
 
 # frame work for a class
 class Class(Composer):
@@ -37,11 +38,20 @@ class Class(Composer):
         for getset in self.get_all_of_kind(GetSet):
             getset.set_attr(attrs)
 
+        # we also need to set the reference attrs
+        # while this is done, simultaneously set the name
+        for constructor in self.get_all_of_kind(Constructor):
+            constructor.setup_params(attrs)
+            constructor.name = self.name
+
         s = []
         if lang == 'java':
 
             # add mod str
-            s.append(self.mod.mod_str(lang) + ' ')
+            mod_str = self.mod.mod_str(lang)
+            if mod_str != '':
+                s.append(mod_str)
+                s.append(' ')
 
             s.append('class ')
             if self.name == '':

@@ -21,7 +21,7 @@ class GetSet(Composer):
 
     # use the local varname,
     # and the inputed list of attributes to set the correct Attribute to var
-    def set_attr(self, all_attrs: Attribute):
+    def set_attr(self, all_attrs: [Attribute]):
 
         # if this is a getter or setter for all, possible_vars shoudl just be attrs
         if self.varname == 'all':
