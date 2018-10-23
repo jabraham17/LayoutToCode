@@ -1,4 +1,6 @@
-ANTLR=java -Xmx500M -cp antlr/antlr-4.7.1-complete.jar org.antlr.v4.Tool
+ANTLR_FOLDER=antlr
+ANTLR_PATH=$(ANTLR_FOLDER)/antlr-4.7.1-complete.jar
+ANTLR=java -Xmx500M -cp $(ANTLR_PATH) org.antlr.v4.Tool
 
 GRAMMAR=ClassLayout.g4
 
@@ -48,8 +50,20 @@ mkEnv:
 		fi; \
 	fi; \
 
+mkAntlr:
+	@echo -e "$(GREEN)Checking for antlr$(COLOR_OFF)"
+	@if [ ! -e $(ANTLR_PATH) ] ; \
+	then \
+		echo -e "$(GREEN)No antlr found$(COLOR_OFF)"; \
+		echo -e "$(GREEN)Downloading antlr$(COLOR_OFF)"; \
+		mkdir $(ANTLR_FOLDER); \
+		curl https://www.antlr.org/download/antlr-4.7.1-complete.jar -o $(ANTLR_PATH); \
+		echo -e "$(GREEN)Download complete$(COLOR_OFF)"; \
+	else \
+		echo -e "$(GREEN)antlr is installed$(COLOR_OFF)"; \
+	fi; \
 
-buildGrammar: clean
+buildGrammar: clean mkAntlr
 	@echo -e "$(GREEN)Building grammar and creating listeners$(COLOR_OFF)"
 	@mkdir -p $(OUTPUT)
 	@$(ANTLR) -o $(OUTPUT) -Dlanguage=Python3 $(GRAMMAR)
@@ -63,4 +77,9 @@ clean:
 cleanEnv:
 	@echo -e "$(GREEN)Cleaning $(ENV)......$(COLOR_OFF)"
 	@rm -rf $(ENV)
+	@echo -e "$(GREEN)Done$(COLOR_OFF)"
+
+cleanAntlr:
+	@echo -e "$(GREEN)Cleaning $(ANTLR_FOLDER)......$(COLOR_OFF)"
+	@rm -rf $(ANTLR_FOLDER)
 	@echo -e "$(GREEN)Done$(COLOR_OFF)"
