@@ -14,7 +14,7 @@ def compile(filename, lang):
 def check_file(name):
     # if no proper file extension, raise error
     if not name.endswith('.l2c'):
-        raise argparse.ArgumentTypeError(f'{name} is not a proper file that can be used by this script')
+        raise argparse.ArgumentTypeError('{name} is not a proper file that can be used by this script')
     return name
 
 # gets all files from the current directory
