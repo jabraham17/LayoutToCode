@@ -14,8 +14,6 @@ ENV=env
 PYTHON=$(ENV)/bin/python
 PIP=$(ENV)/bin/pip
 
-.PHONY: runTest buildGrammar clean
-
 # the envirmoent needs to be running to run
 runTest: buildGrammar loadLibs
 	@echo -e "$(GREEN)Running test.l2c through script inside of env$(COLOR_OFF)"
@@ -83,3 +81,5 @@ cleanAntlr:
 	@echo -e "$(GREEN)Cleaning $(ANTLR_FOLDER)......$(COLOR_OFF)"
 	@rm -rf $(ANTLR_FOLDER)
 	@echo -e "$(GREEN)Done$(COLOR_OFF)"
+
+cleanAll: clean cleanAntlr cleanEnv
