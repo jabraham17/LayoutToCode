@@ -20,9 +20,10 @@ constructor : modifiers (DefaultKeyword | (constructorParameter (ParamaterSepera
 constructorParameter : variableReference? variable? Name ;
 
 //methods and getters and setters
-method : modifiers Name methodParameter* methodReturnType? Newline ;
-methodReturnType : ParamaterSeperator ReturnSpecifier Name ;
-methodParameter : ParamaterSeperator (Name Seperator)? Name ;
+method : modifiers Name methodParameter* methodReturnType Newline ;
+methodReturnType : ParamaterSeperator ReturnSpecifier Name? ;
+methodParameter : ParamaterSeperator methodParameterVar? Name ;
+methodParameterVar : Name Seperator ;
 getset : (GetKeyword | SetKeyword) Seperator (AllKeyword | Name) Newline ;
 
 //used in multple sections

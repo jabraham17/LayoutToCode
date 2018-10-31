@@ -28,7 +28,7 @@ class BodyListener(ClassLayoutListener):
             elif isinstance(a, ClassLayoutParser.MethodContext):
                 listener = MethodListener()
                 a.enterRule(listener)
-                # self.cla.comp.append(listener.attr)
+                self.cla.comp.append(listener.method)
             elif isinstance(a, ClassLayoutParser.GetsetContext):
                 listener = GetSetListener()
                 a.enterRule(listener)

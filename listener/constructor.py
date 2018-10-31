@@ -14,7 +14,7 @@ class ConstructorListener(ClassLayoutListener):
         # handle the modifiers
         modifier_listener = ModifierListener()
         ctx.modifiers().enterRule(modifier_listener)
-        self.constructor.mod = modifier_listener.mod\
+        self.constructor.mod = modifier_listener.mod
 
         # if its default, dont try and run params
         if ctx.DefaultKeyword():

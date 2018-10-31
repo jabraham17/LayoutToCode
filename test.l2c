@@ -17,7 +17,10 @@ fullvar::newvar: Type, var: Type, Type
 
 
 //methods
-+s:method, param: Type, Type, >Type
++s:method1, param: Type, Type, >Type
+-f:method2, Type, Type, >
+#method3, >
+method4, >Type
 get:all
 set:var
 
