@@ -14,11 +14,36 @@ ENV=env
 PYTHON=$(ENV)/bin/python
 PIP=$(ENV)/bin/pip
 
+
+# vars for compiling to a c binary
+CP=env/bin/cython
+CC=gcc
+CFLAGS=-Wall -g -O2
+LDFLAGS=
+PYTHON_FILES=$(wildcard *.p)
+CYTHON_FILES=$(SOURCES:.p=.pyx)
+EXECUTABLE=a.out
+
+#all:$(OBJECTS)
+#	$(CC) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+#
+#$(OBJECTS):$(SOURCES)
+#	$(CC) $(CFLAGS) -c $(SOURCES)
+#
+#clean:
+#	rm *.o $(EXECUTABLE)
+
+# task to compile to a binary
+#compile:
+
 # the envirmoent needs to be running to run
-runTest: buildGrammar loadLibs
+runTest: generate
 	@echo -e "$(GREEN)Running test.l2c through script inside of env$(COLOR_OFF)"
 	@./$(PYTHON) layout2code.py test.l2c
 	@echo -e "$(GREEN)Done$(COLOR_OFF)"
+
+#generate grammar and libararies, make env if nessarcy
+generate: mkEnv buildGrammar loadLibs
 
 # save external libs in requirements.txt
 saveLibs: mkEnv
